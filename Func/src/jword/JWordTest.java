@@ -58,12 +58,12 @@ public class JWordTest {
 	public static void main(String[] args) {
 //		insertImage();
 //		tableTest();
-//		test();
+		test();
 //		page();
 //		createTableContent();
 //		custom();
 //		pageBrake();
-		textBox();
+//		textBox();
 	}
 	
 	private static void create(){
@@ -89,9 +89,9 @@ public class JWordTest {
             }
             
             
-            addDataToTable(newsTable);
-            
-            doc.save("./云天弈.docx");
+//            addDataToTable(newsTable);
+//            
+//            doc.save("./replaceTest.docx");
         }
         catch (Exception e)
         {
@@ -115,11 +115,11 @@ public class JWordTest {
 		
 		List<TableItem> items = new ArrayList<TableItem>();
 		
-		TableItem item1 = new TableItem("排序", 1101);
-		TableItem item2 = new TableItem("新闻指数", 1559);
-		TableItem item3 = new TableItem("新闻标题", 2594);
-		TableItem item4 = new TableItem("新闻来源", 1517);
-		TableItem item5 = new TableItem("发表日期", 1876);
+		TableItem item1 = new TableItem("排序2", 1101);
+		TableItem item2 = new TableItem("新闻指数2", 1559);
+		TableItem item3 = new TableItem("新闻标题2", 2594);
+		TableItem item4 = new TableItem("新闻来源2", 1517);
+		TableItem item5 = new TableItem("发表日期2", 1876);
 		
 		items.add(item1);
 		items.add(item2);
