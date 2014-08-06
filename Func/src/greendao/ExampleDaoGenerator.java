@@ -32,19 +32,40 @@ import de.greenrobot.daogenerator.ToMany;
 public class ExampleDaoGenerator {
 
     public static void main(String[] args) throws Exception {
-        Schema schema = new Schema(3, "com.tianwen.yuntianyi.greendao");
+        Schema schema = new Schema(3, "com.tianwen.news.data.db");
 
-        addNote(schema);
+//        addNote(schema);
 //        addCustomerOrder(schema);
-        addTask(schema);
-        addHistory(schema);
-        addAttention(schema);
-        addCatalog(schema);
-        addWeiboTrack(schema);
+//        addTask(schema);
+//        addHistory(schema);
+//        addAttention(schema);
+//        addCatalog(schema);
+//        addWeiboTrack(schema);
 
+        addStock(schema);
+        addStockHistory(schema);
+        
         new DaoGenerator().generateAll(schema, "./src-gen");
         
     }
+    
+    private static void addStock(Schema schema){
+    	Entity stock = schema.addEntity("Stock");
+    	stock.addStringProperty("stockCode").primaryKey().notNull();
+    	stock.addStringProperty("stockName").notNull();
+    	stock.addStringProperty("pinyin");
+    	stock.addStringProperty("mtype");
+    }
+    
+    private static void addStockHistory(Schema schema){
+    	Entity history = schema.addEntity("SearchHistory");
+        history.addStringProperty("stockCode").primaryKey().notNull();
+        history.addStringProperty("stockName").notNull();
+        history.addStringProperty("pinyin");
+        history.addStringProperty("mtype");
+        history.addLongProperty("date");
+    }
+    
 
     private static void addNote(Schema schema) {
         Entity note = schema.addEntity("Note");
