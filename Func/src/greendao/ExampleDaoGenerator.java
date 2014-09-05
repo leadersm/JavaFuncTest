@@ -42,6 +42,7 @@ public class ExampleDaoGenerator {
 //        addCatalog(schema);
 //        addWeiboTrack(schema);
 
+        addNewsType(schema);
         addStock(schema);
         addStockHistory(schema);
         
@@ -49,7 +50,26 @@ public class ExampleDaoGenerator {
         
     }
     
-    private static void addStock(Schema schema){
+    private static void addNewsType(Schema schema) {
+    	Entity temp = schema.addEntity("NewsType");
+//    	String id;//: "stock_dcbk",
+    	temp.addStringProperty("id").primaryKey().notNull();
+//    	String name;//: "地产行业",
+    	temp.addStringProperty("name").notNull();
+//    	String desc;//: "聚焦地产行业热点新闻",
+    	temp.addStringProperty("desc");
+//    	String mode;//: "000",
+    	temp.addStringProperty("mode");
+//    	String boss;//: "30",
+    	temp.addStringProperty("boss");
+//    	String market;//: "0",
+    	temp.addStringProperty("market");
+//    	String color;//: "1"
+    	temp.addStringProperty("color");
+		temp.addIntProperty("sort");
+	}
+
+	private static void addStock(Schema schema){
     	Entity stock = schema.addEntity("Stock");
     	stock.addStringProperty("stockCode").primaryKey().notNull();
     	stock.addStringProperty("stockName").notNull();
