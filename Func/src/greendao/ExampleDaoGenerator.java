@@ -45,11 +45,16 @@ public class ExampleDaoGenerator {
         addNewsType(schema);
         addStock(schema);
         addStockHistory(schema);
-        
+        addReadHistory(schema);
         new DaoGenerator().generateAll(schema, "./src-gen");
         
     }
     
+    private static void addReadHistory(Schema schema) {
+    	Entity temp = schema.addEntity("Read");
+    	temp.addStringProperty("newsId").primaryKey().notNull();
+    	temp.addLongProperty("date");
+    }
     private static void addNewsType(Schema schema) {
     	Entity temp = schema.addEntity("NewsType");
 //    	String id;//: "stock_dcbk",
