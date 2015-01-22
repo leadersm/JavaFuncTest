@@ -2,12 +2,18 @@ package javassist;
 
 import java.io.IOException;
 
+/**
+ * 破解Jword
+ * @author lsm
+ *
+ */
 public class Javassist {
 
 	public static void main(String[] args) {
 		ClassPool pool = ClassPool.getDefault();
 		try {
-			pool.insertClassPath("E://download/JWord/jword-1.0.jar");
+//			pool.insertClassPath("E://download/JWord/jword-1.0.jar");
+			pool.insertClassPath("./jword-1.0.jar");
 			CtClass cc = pool.get("com.independentsoft.office.word.a");
 			
 			CtMethod cm = cc.getDeclaredMethod("a", new CtClass[]{});
@@ -21,7 +27,8 @@ public class Javassist {
 					"return;}", cc);
 			cc.addMethod(cm1);
 			
-			cc.writeFile("E://download/JWord/");
+//			cc.writeFile("E://download/JWord/");
+			cc.writeFile("./JWord/");
 			
 		} catch (NotFoundException e) {
 			e.printStackTrace();

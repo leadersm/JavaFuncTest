@@ -47,21 +47,53 @@ public class GTCDaoGenerator {
         //自动报告记录
         addAutoReportRecord(schema);
         //消息记录表
-        addMessageTable(schema);
-        
+        addGTCMsgTable(schema);
+        //聊天用户
+        addChatUserTable(schema);
+        //likePost
+        addLikePostTable(schema);
+        //likeComment
+        addLikeCommentTable(schema);
         
         new DaoGenerator().generateAll(schema, "./src-gen");
     }
     
-    private static void addMessageTable(Schema schema) {
+    private static void addLikeCommentTable(Schema schema) {
 		// TODO Auto-generated method stub
-    	Entity temp = schema.addEntity("Messages");
+    	Entity temp = schema.addEntity("LikeComment");
+		temp.addStringProperty("commentId").primaryKey().notNull();
+		//时间date
+    	temp.addLongProperty("date");
+	}
+
+	private static void addLikePostTable(Schema schema) {
+	   	Entity temp = schema.addEntity("LikePost");
+		//postId
+		temp.addStringProperty("postId").primaryKey().notNull();
+		//时间date
+    	temp.addLongProperty("date");
+	}
+
+	private static void addChatUserTable(Schema schema) {
+		// TODO Auto-generated method stub
+    	Entity temp = schema.addEntity("GTCUser");
+		//发送账号userId
+    	temp.addStringProperty("userId").primaryKey().notNull();
+    	//发送账号昵称：nickname
+    	temp.addStringProperty("nickname");
+    	//发送账号logo
+    	temp.addStringProperty("logo");
+	}
+
+	private static void addGTCMsgTable(Schema schema) {
+		// TODO Auto-generated method stub
+    	Entity temp = schema.addEntity("GTCMsg");
     	//消息id
     	temp.addStringProperty("id").primaryKey().notNull();
-		//发送账号fromAccount
-    	temp.addStringProperty("fromAccount");
-    	//发送账号昵称：fromName
-    	temp.addStringProperty("fromName");
+    	//发送账号from userId
+    	temp.addStringProperty("from");
+		//发送账号to userId
+    	temp.addStringProperty("to");
     	//消息内容content
     	temp.addStringProperty("content");
     	//时间date

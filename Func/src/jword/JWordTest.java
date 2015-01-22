@@ -1,5 +1,6 @@
 package jword;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.independentsoft.office.word.BottomBorder;
 import com.independentsoft.office.word.DrawingObject;
 import com.independentsoft.office.word.FieldCode;
 import com.independentsoft.office.word.HorizontalAlignmentType;
+import com.independentsoft.office.word.Hyperlink;
 import com.independentsoft.office.word.LineSpacingRule;
 import com.independentsoft.office.word.Paragraph;
 import com.independentsoft.office.word.Run;
@@ -32,6 +34,7 @@ import com.independentsoft.office.word.StandardBorderStyle;
 import com.independentsoft.office.word.Tab;
 import com.independentsoft.office.word.TabLeaderCharacter;
 import com.independentsoft.office.word.TabType;
+import com.independentsoft.office.word.Underline;
 import com.independentsoft.office.word.VmlObject;
 import com.independentsoft.office.word.WordDocument;
 import com.independentsoft.office.word.drawing.DrawingObjectSize;
@@ -73,25 +76,44 @@ public class JWordTest {
 	private static void test() {
         try
         {
-            WordDocument doc = new WordDocument("./yunTianYi.docx");
+//        	WordDocument doc = new WordDocument("./yunTianYi.docx");
+            WordDocument doc = new WordDocument();
 
-            doc.replace("{no.}", "12345");
-            doc.replace("{keywords}","关键词");
-
-            doc.replace("{转发增量图}", getImageRun());
-            
-            List<Table> tables = doc.getTables();
-            System.out.println("tables.size:"+tables.size());
-            
-            Table newsTable = tables.get(2);
-            for(IContentElement i : newsTable.getContentElements()){
-            	handleElement(i);
-            }
-            
-            
-//            addDataToTable(newsTable);
+//            doc.replace("{no.}", "12345");
+//            doc.replace("{keywords}","关键词");
+//
+//            doc.replace("{转发增量图}", getImageRun());
 //            
-//            doc.save("./replaceTest.docx");
+//            List<Table> tables = doc.getTables();
+//            System.out.println("tables.size:"+tables.size());
+//            
+//            Table newsTable = tables.get(2);
+//            for(IContentElement i : newsTable.getContentElements()){
+//            	handleElement(i);
+//            }
+            
+            
+//            addDataToTable(table);
+            
+            Run run = new Run("baidu");
+            Underline u = new Underline();
+            com.independentsoft.office.word.Color c = new com.independentsoft.office.word.Color();
+            c.setHexValue("0x00ddff");
+            u.setColor(c);
+            run.setUnderline(u);
+            run.setFontSize(50);
+            
+            Hyperlink link = new Hyperlink();
+			link.setTarget("http://www.baidu.com");
+			link.add(run);
+			
+			Paragraph p = new Paragraph();
+			
+			p.add(link);
+			
+			doc.getBody().add(p);
+            
+            doc.save("./replaceTest.docx");
         }
         catch (Exception e)
         {
@@ -149,10 +171,16 @@ public class JWordTest {
 
 		public Cell getCell(){
 			Run run = new Run(name);
+
+			Hyperlink link = new Hyperlink();
+			link.setTarget("http://www.baidu.com");
+			link.setAnchor("百度");
 			
 			Paragraph p = new Paragraph();
 			p.setHorizontalTextAlignment(HorizontalAlignmentType.CENTER);
-			p.add(run);
+//			p.add(run);
+			
+			p.add(link);
 			
 			Cell c = new Cell();
 			c.setWidth(new Width(TableWidthUnit.POINT, width));
